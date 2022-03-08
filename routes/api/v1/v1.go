@@ -6,5 +6,5 @@ import (
 
 // Router define routes the API V1
 func Router(router *gin.RouterGroup) {
-	resolverRouter(router.Group("/resolve"))
+	resolveRouter(router.Group("/resolve"))
 }
