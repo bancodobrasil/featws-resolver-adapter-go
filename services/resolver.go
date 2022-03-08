@@ -14,8 +14,6 @@ var lock = &sync.Mutex{}
 
 var resolverFunc ResolverFunc
 
-// ResolveInput contains all input for resolver execution
-
 // SetupResolver to config the current resolver func
 func SetupResolver(rFunc ResolverFunc) {
 	lock.Lock()

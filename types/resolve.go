@@ -1,5 +1,6 @@
 package types
 
+// ResolveInput contains all input for resolver execution
 type ResolveInput struct {
 	Context map[string]interface{} `json:"context"`
 	Load    []string               `json:"load"`

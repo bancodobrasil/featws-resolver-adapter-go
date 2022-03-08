@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ResolverHandler ...
+// ResolveHandler ...
 func ResolveHandler(c *gin.Context) {
 	var input types.ResolveInput
 	if err := c.ShouldBindJSON(&input); err != nil {
