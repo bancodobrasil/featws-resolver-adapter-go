@@ -4,12 +4,13 @@ import (
 	"net/http"
 
 	"github.com/bancodobrasil/featws-resolver-adapter-go/services"
+	"github.com/bancodobrasil/featws-resolver-adapter-go/types"
 	"github.com/gin-gonic/gin"
 )
 
 // ResolverHandler ...
-func ResolverHandler(c *gin.Context) {
-	var input services.ResolveInput
+func ResolveHandler(c *gin.Context) {
+	var input types.ResolveInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

@@ -3,26 +3,18 @@ package services
 import (
 	"fmt"
 	"sync"
+
+	"github.com/bancodobrasil/featws-resolver-adapter-go/types"
 )
 
 // ResolverFunc define the Resolver Function structure
-type ResolverFunc func(ResolveInput, *ResolveOutput)
+type ResolverFunc func(types.ResolveInput, *types.ResolveOutput)
 
 var lock = &sync.Mutex{}
 
 var resolverFunc ResolverFunc
 
 // ResolveInput contains all input for resolver execution
-type ResolveInput struct {
-	Context map[string]interface{} `json:"context"`
-	Load    []string               `json:"load"`
-}
-
-// ResolveOutput contais all output of resolver execution
-type ResolveOutput struct {
-	Context map[string]interface{} `json:"context"`
-	Errors  map[string]interface{} `json:"errors"`
-}
 
 // SetupResolver to config the current resolver func
 func SetupResolver(rFunc ResolverFunc) {
@@ -41,8 +33,8 @@ func SetupResolver(rFunc ResolverFunc) {
 }
 
 // Resolve to execute the resolver
-func Resolve(input ResolveInput) (output *ResolveOutput) {
-	output = &ResolveOutput{
+func Resolve(input types.ResolveInput) (output *types.ResolveOutput) {
+	output = &types.ResolveOutput{
 		Context: input.Context,
 		Errors:  make(map[string]interface{}),
 	}
