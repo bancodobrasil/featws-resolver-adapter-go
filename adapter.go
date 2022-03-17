@@ -22,7 +22,7 @@ func setupLog() {
 var Config = config.Config{}
 
 // Run start the resolver server with resolverFunc
-func Run(resolverFunc services.ResolverFunc) {
+func Run(resolverFunc services.ResolverFunc) error {
 
 	setupLog()
 
@@ -39,5 +39,5 @@ func Run(resolverFunc services.ResolverFunc) {
 
 	port := Config.Port
 
-	router.Run(":" + port)
+	return router.Run(":" + port)
 }
