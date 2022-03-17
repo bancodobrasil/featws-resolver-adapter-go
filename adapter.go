@@ -3,7 +3,6 @@ package adapter
 import (
 	"os"
 
-	"github.com/bancodobrasil/featws-resolver-adapter-go/config"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/services"
 	"github.com/gin-gonic/gin"
@@ -18,18 +17,15 @@ func setupLog() {
 	log.SetLevel(log.DebugLevel)
 }
 
-// Config contains all settings of module
-var Config = config.Config{}
+// Config ...
+type Config struct {
+	Port string
+}
 
 // Run start the resolver server with resolverFunc
-func Run(resolverFunc services.ResolverFunc) error {
+func Run(resolverFunc services.ResolverFunc, config Config) error {
 
 	setupLog()
-
-	err := config.LoadConfig(&Config)
-	if err != nil {
-		log.Fatalf("Não foi possível carregar as configurações: %s\n", err)
-	}
 
 	services.SetupResolver(resolverFunc)
 
@@ -37,7 +33,5 @@ func Run(resolverFunc services.ResolverFunc) error {
 
 	routes.SetupRoutes(router)
 
-	port := Config.Port
-
-	return router.Run(":" + port)
+	return router.Run(":" + config.Port)
 }
