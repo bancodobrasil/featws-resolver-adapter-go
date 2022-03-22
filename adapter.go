@@ -29,7 +29,7 @@ func Run(resolverFunc services.ResolverFunc, config Config) error {
 
 	setupLog()
 
-	monitor, err := ginMonitor.New("v0.0.1-rc6", ginMonitor.DefaultErrorMessageKey, ginMonitor.DefaultBuckets)
+	monitor, err := ginMonitor.New("v0.0.1-rc7", ginMonitor.DefaultErrorMessageKey, ginMonitor.DefaultBuckets)
 	if err != nil {
 		panic(err)
 	}
