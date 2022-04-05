@@ -13,6 +13,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	ginlogrus "github.com/toorop/gin-logrus"
 )
 
 func init() {
@@ -51,9 +52,14 @@ func Run(resolverFunc services.ResolverFunc, config Config) error {
 		panic(err)
 	}
 
+	gin.DefaultWriter = log.StandardLogger().WriterLevel(log.DebugLevel)
+	gin.DefaultErrorWriter = log.StandardLogger().WriterLevel(log.ErrorLevel)
+
 	services.SetupResolver(resolverFunc)
 
 	router := gin.New()
+	// Register ginLogrus log format to gin
+	router.Use(ginlogrus.Logger(log.StandardLogger()), gin.Recovery())
 
 	// Register gin-monitor middleware
 	router.Use(monitor.Prometheus())
