@@ -1,10 +1,10 @@
 package services
 
 import (
-	"fmt"
 	"sync"
 
 	"github.com/bancodobrasil/featws-resolver-adapter-go/types"
+	log "github.com/sirupsen/logrus"
 )
 
 // ResolverFunc define the Resolver Function structure
@@ -20,13 +20,13 @@ func SetupResolver(rFunc ResolverFunc) {
 	defer lock.Unlock()
 	if resolverFunc == nil {
 		if resolverFunc == nil {
-			fmt.Println("Creating single instance now.")
+			log.Debugln("Creating single instance now.")
 			resolverFunc = rFunc
 		} else {
-			fmt.Println("Single instance already created.")
+			log.Debugln("Single instance already created.")
 		}
 	} else {
-		fmt.Println("Single instance already created.")
+		log.Debugln("Single instance already created.")
 	}
 }
 
