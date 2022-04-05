@@ -57,10 +57,10 @@ func Run(resolverFunc services.ResolverFunc, config Config) error {
 
 	// Register gin-monitor middleware
 	router.Use(monitor.Prometheus())
-	// Register gin-telemetry middleware
-	router.Use(telemetry.Middleware(viper.GetString("RESOLVER_SERVICE_NAME")))
 	// Register metrics endpoint
 	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
+	// Register gin-telemetry middleware
+	router.Use(telemetry.Middleware(viper.GetString("RESOLVER_SERVICE_NAME")))
 
 	routes.SetupRoutes(router)
 
