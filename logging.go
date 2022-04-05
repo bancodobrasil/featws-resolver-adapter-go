@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/viper"
 )
 
+// InitLogger ...
 func InitLogger() {
 	log.SetFormatter(&log.TextFormatter{FullTimestamp: true})
 	if viper.GetBool("RESOLVER_LOG_JSON") {
