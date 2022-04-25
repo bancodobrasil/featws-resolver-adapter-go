@@ -1,0 +1,78 @@
+basePath: /api/v1
+definitions:
+  types.ResolveInput:
+    properties:
+      context:
+        additionalProperties: true
+        type: object
+      load:
+        items:
+          type: string
+        type: array
+    type: object
+host: localhost:7000
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Resolver Adapter Project is a library to provide resolvers to other
+    projects
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: FeatWS Resolver Adapter
+  version: "1.0"
+paths:
+  /resolve:
+    post:
+      consumes:
+      - application/json
+      description: Receive the params to create a resolver from JSON
+      parameters:
+      - description: context
+        in: path
+        name: context
+        required: true
+        type: string
+      - description: load
+        in: path
+        name: load
+        required: true
+        type: string
+      - description: Parameters
+        in: body
+        name: parameters
+        required: true
+        schema:
+          $ref: '#/definitions/types.ResolveInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: Resolve the JSON
+      tags:
+      - resolve
+swagger: "2.0"
+x-extension-openapi:
+  example: value on a json format
