@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
+	// Specificate the docs package
 	_ "github.com/bancodobrasil/featws-resolver-adapter-go/docs"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/services"
@@ -67,6 +67,7 @@ type Config struct {
 
 // @x-extension-openapi {"example": "value on a json format"}
 
+// Run ...
 func Run(resolverFunc services.ResolverFunc, config Config) error {
 
 	InitLogger()
