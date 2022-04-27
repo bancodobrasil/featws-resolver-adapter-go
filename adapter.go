@@ -4,7 +4,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
+	// Specificate the docs package
+	_ "github.com/bancodobrasil/featws-resolver-adapter-go/docs"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/services"
 	ginMonitor "github.com/bancodobrasil/gin-monitor"
@@ -42,7 +43,31 @@ type Config struct {
 	Port string
 }
 
-// Run start the resolver server with resolverFunc
+// @title FeatWS Resolver Adapter
+
+// @version 1.0
+
+// @description Resolver Adapter Project is a library to provide resolvers to other projects
+
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+
+// @contact.url http://www.swagger.io/support
+
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:7000
+
+// @BasePath /api/v1
+
+// @x-extension-openapi {"example": "value on a json format"}
+
+// Run ...
 func Run(resolverFunc services.ResolverFunc, config Config) error {
 
 	InitLogger()
