@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
 	// Specificate the docs package
 	_ "github.com/bancodobrasil/featws-resolver-adapter-go/docs"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes"
