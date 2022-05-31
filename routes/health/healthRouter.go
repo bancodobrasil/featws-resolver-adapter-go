@@ -8,4 +8,5 @@ import (
 // Router ...
 func Router(router *gin.RouterGroup) {
 	router.GET("/live", controllers.HealthLiveHandler())
+	router.GET("/ready", controllers.HealthLiveHandler())
 }
