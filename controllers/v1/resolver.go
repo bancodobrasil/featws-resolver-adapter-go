@@ -30,6 +30,7 @@ func ResolveHandler(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	resolverOutput := services.Resolve(input)
+	ctx := c.Request.Context()
+	resolverOutput := services.Resolve(ctx, input)
 	c.JSON(http.StatusOK, resolverOutput)
 }

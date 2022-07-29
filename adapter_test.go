@@ -2,6 +2,7 @@ package adapter
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
@@ -49,7 +50,7 @@ func setup() {
 
 func shutdown() {}
 
-func resolverTest(resolveInput types.ResolveInput, resolveOutput *types.ResolveOutput) {
+func resolverTest(ctx context.Context, resolveInput types.ResolveInput, resolveOutput *types.ResolveOutput) {
 	sort.Strings(resolveInput.Load)
 	if contains(resolveInput.Load, labelLoadTest) {
 		contextValue, ok := resolveInput.Context[labelContextTest]
