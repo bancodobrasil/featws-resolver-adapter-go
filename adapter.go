@@ -10,7 +10,6 @@ import (
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/services"
 	ginMonitor "github.com/bancodobrasil/gin-monitor"
-	telemetry "github.com/bancodobrasil/gin-telemetry"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
@@ -91,9 +90,8 @@ func Run(resolverFunc services.ResolverFunc, config Config) error {
 	router.Use(monitor.Prometheus())
 	// Register metrics endpoint
 	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
-	// Register gin-telemetry middleware
-	router.Use(telemetry.Middleware(viper.GetString("RESOLVER_SERVICE_NAME")))
 	routes.SetupRoutes(router)
+	routes.APIRoutes(router)
 
 	return router.Run(":" + config.Port)
 }
