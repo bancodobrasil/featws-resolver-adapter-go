@@ -19,6 +19,7 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
 
+// APIRoutes ...
 func APIRoutes(router *gin.Engine) {
 	// inject middleware
 	group := router.Group("/api")
