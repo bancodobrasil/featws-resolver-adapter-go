@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/bancodobrasil/featws-resolver-adapter-go/docs"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes/api"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes/health"
 	telemetry "github.com/bancodobrasil/gin-telemetry"
@@ -12,6 +13,10 @@ import (
 
 // SetupRoutes define all routes
 func SetupRoutes(router *gin.Engine) {
+
+	externalHost := viper.GetString("EXTERNAL_HOST")
+
+	docs.SwaggerInfo.Host = externalHost
 
 	homeRouter(router.Group("/"))
 	health.Router(router.Group("/health"))
