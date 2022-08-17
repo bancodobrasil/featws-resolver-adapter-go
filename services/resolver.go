@@ -1,28 +1,19 @@
 package services
 
 import (
-	"fmt"
+	"context"
 	"sync"
+
+	"github.com/bancodobrasil/featws-resolver-adapter-go/types"
+	log "github.com/sirupsen/logrus"
 )
 
 // ResolverFunc define the Resolver Function structure
-type ResolverFunc func(ResolveInput, *ResolveOutput)
+type ResolverFunc func(context.Context, types.ResolveInput, *types.ResolveOutput)
 
 var lock = &sync.Mutex{}
 
 var resolverFunc ResolverFunc
-
-// ResolveInput contains all input for resolver execution
-type ResolveInput struct {
-	Context map[string]interface{} `json:"context"`
-	Load    []string               `json:"load"`
-}
-
-// ResolveOutput contais all output of resolver execution
-type ResolveOutput struct {
-	Context map[string]interface{} `json:"context"`
-	Errors  map[string]interface{} `json:"errors"`
-}
 
 // SetupResolver to config the current resolver func
 func SetupResolver(rFunc ResolverFunc) {
@@ -30,23 +21,23 @@ func SetupResolver(rFunc ResolverFunc) {
 	defer lock.Unlock()
 	if resolverFunc == nil {
 		if resolverFunc == nil {
-			fmt.Println("Creating single instance now.")
+			log.Debugln("Creating single instance now.")
 			resolverFunc = rFunc
 		} else {
-			fmt.Println("Single instance already created.")
+			log.Debugln("Single instance already created.")
 		}
 	} else {
-		fmt.Println("Single instance already created.")
+		log.Debugln("Single instance already created.")
 	}
 }
 
 // Resolve to execute the resolver
-func Resolve(input ResolveInput) (output *ResolveOutput) {
-	output = &ResolveOutput{
+func Resolve(ctx context.Context, input types.ResolveInput) (output *types.ResolveOutput) {
+	output = &types.ResolveOutput{
 		Context: input.Context,
 		Errors:  make(map[string]interface{}),
 	}
-	resolverFunc(input, output)
+	resolverFunc(ctx, input, output)
 
 	if len(input.Load) > 0 {
 		oldContext := output.Context
