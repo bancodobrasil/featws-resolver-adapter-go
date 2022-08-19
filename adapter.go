@@ -30,7 +30,7 @@ func init() {
 	replacer := strings.NewReplacer(".", "_")
 	viper.SetEnvKeyReplacer(replacer)
 	viper.AutomaticEnv()
-	viper.SetDefault("EXTERNAL_HOST", "localhost:7000")
+	viper.SetDefault("FEATWS_EXTERNAL_HOST", "localhost:7000")
 	viper.SetDefault("RESOLVER_LOG_JSON", false)
 	viper.SetDefault("RESOLVER_LOG_LEVEL", "error")
 	viper.SetDefault("RESOLVER_SERVICE_NAME", "resolver-adapter-go")

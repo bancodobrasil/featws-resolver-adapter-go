@@ -14,7 +14,7 @@ import (
 // SetupRoutes define all routes
 func SetupRoutes(router *gin.Engine) {
 
-	externalHost := viper.GetString("EXTERNAL_HOST")
+	externalHost := viper.GetString("FEATWS_EXTERNAL_HOST")
 
 	docs.SwaggerInfo.Host = externalHost
 
