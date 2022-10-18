@@ -7,6 +7,7 @@ import (
 
 	// Specificate the docs package
 	_ "github.com/bancodobrasil/featws-resolver-adapter-go/docs"
+	"github.com/bancodobrasil/featws-resolver-adapter-go/middlewares"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/routes"
 	"github.com/bancodobrasil/featws-resolver-adapter-go/services"
 	ginMonitor "github.com/bancodobrasil/gin-monitor"
@@ -34,6 +35,7 @@ func init() {
 	viper.SetDefault("RESOLVER_LOG_JSON", false)
 	viper.SetDefault("RESOLVER_LOG_LEVEL", "error")
 	viper.SetDefault("RESOLVER_SERVICE_NAME", "resolver-adapter-go")
+	viper.SetDefault("RESOLVER_API_KEY", "")
 	if err := viper.ReadInConfig(); err == nil {
 		log.Infof("Using config file: %s", viper.ConfigFileUsed())
 	}
@@ -84,6 +86,9 @@ func Run(resolverFunc services.ResolverFunc, config Config) error {
 	services.SetupResolver(resolverFunc)
 
 	router := gin.New()
+
+	middlewares.InitializeMiddlewares()
+
 	// Register ginLogrus log format to gin
 	router.Use(ginlogrus.Logger(log.StandardLogger()), gin.Recovery())
 
