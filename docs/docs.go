@@ -27,6 +27,11 @@ const docTemplate = `{
     "paths": {
         "/resolve": {
             "post": {
+                "security": [
+                    {
+                        "Authentication Api Key": []
+                    }
+                ],
                 "description": "Receive the params to create a resolver from JSON",
                 "consumes": [
                     "application/json"
@@ -113,6 +118,13 @@ const docTemplate = `{
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "Authentication Api Key": {
+            "type": "apiKey",
+            "name": "X-API-Key",
+            "in": "header"
         }
     },
     "x-extension-openapi": {
