@@ -22,6 +22,7 @@ import (
 // @Failure 		400,404 {object} string
 // @Failure 		500 {object} string
 // @Failure 		default {object} string
+// @Security		Authentication Api Key
 // @Router 			/resolve [post]
 func ResolveHandler(c *gin.Context) {
 	var input payloads.ResolveInput
