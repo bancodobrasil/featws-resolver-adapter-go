@@ -15,8 +15,6 @@ import (
 // @Tags 			resolve
 // @Accept  		json
 // @Produce  		json
-// @Param			context path string true "context"
-// @Param 			load path string true "load"
 // @Param  			parameters body payloads.ResolveInput true "Parameters"
 // @Success 		200 {string} string "ok"
 // @Failure 		400,404 {object} string
