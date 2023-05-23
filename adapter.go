@@ -49,8 +49,34 @@ type Config struct {
 // @title FeatWS Resolver Adapter
 
 // @version 1.0
-
-// @description Resolver Adapter Project is a library to provide resolvers to other projects
+// @Description
+// @Description	O Resolver Adapter Project é uma biblioteca que fornece um conjunto de resolvers para serem utilizados por outros projetos. Resolvers são um conceito fundamental no desenvolvimento de software que são responsáveis por determinar o valor de um campo em um esquema GraphQL.
+// @Description
+// @Description	No contexto do GraphQL, um resolver é uma função que resolve um campo GraphQL, buscando os dados de uma fonte de dados, como um banco de dados ou uma API. O Resolver Adapter Project fornece um conjunto de resolvers pré-construídos que podem ser usados por outros projetos para lidar com cenários comuns de busca de dados.
+// @Description
+// @Description	Por exemplo, se você tem um esquema GraphQL que inclui um campo para buscar os dados de um usuário. O Resolver Adapter Project pode ser usado para buscar os dados do banco de dados interno do BB sobre um cliente especifico do banco, podendo retornar diversos parâmetros do cliente, como os seguintes:
+// @Description
+// @Description	- account (conta)
+// @Description	- accountType (tipo de conta)
+// @Description	- age (idade)
+// @Description	- agenciaDet (tipo de conta)
+// @Description	- branch (agencia)
+// @Description	- branchState (Estado da agencia)
+// @Description	- customerBase (agencia)
+// @Description	- dataNascimento (data de nascimento)
+// @Description	- employeeDependency (Dependecia do empregado do banco - só trará um retorno se a pessoa for funci do banco)
+// @Description	- employeeKey (se é empregado do banco)
+// @Description	- enterpriseKey (chave empresarial)
+// @Description	- gender (sexo)
+// @Description	- holder (titularidade da conta)
+// @Description	- holderState (estado do titularidade da conta)
+// @Description	- mci
+// @Description	- mcipj
+// @Description	- wallet (carteira)
+// @Description
+// @Description No geral, o Resolver Adapter Project é uma biblioteca útil que pode simplificar o desenvolvimento de APIs GraphQL fornecendo resolvers pré-construídos que podem ser facilmente integrados em outros projetos.
+// @Description
+// @Description Antes de realizar as requisições no Swagger, é necessário autorizar o acesso clicando no botão **Authorize**, ao lado, e inserindo a senha correspondente. Após inserir o campo **value** e clicar no botão **Authorize**, o Swagger estará disponível para ser utilizado.
 
 // @termsOfService http://swagger.io/terms/
 
