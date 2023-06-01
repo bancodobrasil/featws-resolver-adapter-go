@@ -24,7 +24,7 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
 
-// APIRoutes ...
+// APIRoutes sets up API routes with middleware for a Gin router in Go.
 func APIRoutes(router *gin.Engine) {
 	// inject middleware
 	group := router.Group("/api")

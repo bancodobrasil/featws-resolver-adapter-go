@@ -18,6 +18,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// This is a block of constant declarations in Go. It defines several string constants that are used
+// throughout the code, such as labels for context and load, error messages, and a URL for the resolver
+// API. These constants are used to ensure consistency and avoid hardcoding values throughout the code.
 const (
 	labelContextTest        string = "adapter_context_test"
 	labelLoadTest           string = "adapter_load_test"
@@ -30,6 +33,7 @@ const (
 	contentType             string = "application/text"
 )
 
+// TestMain function sets up and shuts down a test environment for Go tests.
 func TestMain(m *testing.M) {
 	setup()
 	code := m.Run()
@@ -37,6 +41,7 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
+// setup sets up a server in a goroutine and waits for it to start running before continuing.
 func setup() {
 	go func() {
 		Run(resolverTest, Config{
@@ -50,6 +55,8 @@ func setup() {
 
 func shutdown() {}
 
+// resolverTest checks if a specific load is present in the input and returns an error
+// message if it is not, or returns a context value if it is present.
 func resolverTest(ctx context.Context, resolveInput types.ResolveInput, resolveOutput *types.ResolveOutput) {
 	sort.Strings(resolveInput.Load)
 	if contains(resolveInput.Load, labelLoadTest) {
@@ -65,26 +72,32 @@ func resolverTest(ctx context.Context, resolveInput types.ResolveInput, resolveO
 	}
 }
 
+// contains checks if a given string is present in a sorted slice of strings.
 func contains(s []string, searchterm string) bool {
 	i := sort.SearchStrings(s, searchterm)
 	return i < len(s) && s[i] == searchterm
 }
 
+// TestAdapterSuccess is a test function in Go that checks if the output of a request matches an expected output.
 func TestAdapterSuccess(t *testing.T) {
 	resolveOutput := testRequest(t, labelContextTest, messageText, labelLoadTest)
 	assert.Equal(t, resolveOutput.Context[labelLoadTest], fmt.Sprintf(msgEchoContext, messageText))
 }
 
+// TestAdapterLabelInvalid is a test function in Go that checks for an invalid label and returns an error message.
 func TestAdapterLabelInvalid(t *testing.T) {
 	resolveOutput := testRequest(t, labelContextTest, messageText, "label_invalid")
 	assert.Equal(t, resolveOutput.Errors[labelLoadSystemError], fmt.Sprintf(msgErrorLoadSystemError, []string{"label_invalid"}))
 }
 
+// TestAdapterContextInvalid is a test function in Go that checks for invalid context and returns an error message.
 func TestAdapterContextInvalid(t *testing.T) {
 	resolveOutput := testRequest(t, "context_invalid", messageText, labelLoadTest)
 	assert.Equal(t, resolveOutput.Errors[labelLoadTest], msgErrorContextMissing)
 }
 
+// testRequest sends a POST request to a URL with JSON data and returns the response as a
+// ResolveOutput object.
 func testRequest(t *testing.T, context string, data string, load string) *types.ResolveOutput {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
@@ -127,6 +140,8 @@ func testRequest(t *testing.T, context string, data string, load string) *types.
 
 // go test -bench . -run="none" -v -count=5
 
+// BenchmarkAdapterResolver is a benchmark function in Go that tests the performance of a function called
+// "testRequestBench" using parallel testing.
 func BenchmarkAdapterResolver(b *testing.B) {
 	b.ResetTimer()
 	b.RunParallel(func(pb *testing.PB) {
@@ -136,6 +151,7 @@ func BenchmarkAdapterResolver(b *testing.B) {
 	})
 }
 
+// testRequestBench sends a POST request to a specified URL with JSON data and reads the response.
 func testRequestBench(context string, data string, load string) {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
