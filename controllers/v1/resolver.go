@@ -9,7 +9,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// ResolveHandler godoc
+// ResolveHandler handles resolving a JSON input and returns the output using the Gin framework in Go.
+//
 // @Summary 		Resolve the JSON
 // @Description	Para conseguir utilizar o endpoint é necessário colocar no body, dentro do *context*, contexto, da requisição a agencia do cliente, *branch*, como também, a conta do mesmo, *account*, como o exemplo a seguir:
 // @Description

@@ -7,7 +7,8 @@ import (
 	"github.com/spf13/viper"
 )
 
-// InitLogger ...
+// InitLogger initializes the logger with a specified log level and formatter based on configuration
+// settings.
 func InitLogger() {
 	log.SetFormatter(&log.TextFormatter{FullTimestamp: true})
 	if viper.GetBool("RESOLVER_LOG_JSON") {

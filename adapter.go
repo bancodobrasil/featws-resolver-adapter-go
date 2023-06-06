@@ -18,6 +18,8 @@ import (
 	ginlogrus "github.com/toorop/gin-logrus"
 )
 
+// init initializes configuration settings for a Go application using environment variables
+// and a configuration file.
 func init() {
 	ex, err := os.Executable()
 	if err != nil {
@@ -41,7 +43,10 @@ func init() {
 	}
 }
 
-// Config ...
+// Config has a single field named Port of type string.
+//
+// Property:
+//   - {string} Port: is a string that represents the port number that a server or application will listen on for incoming network connections. It is commonly used in network programming to specify the communication endpoint for a particular service.
 type Config struct {
 	Port string
 }
@@ -100,7 +105,7 @@ type Config struct {
 
 // @x-extension-openapi {"example": "value on a json format"}
 
-// Run ...
+// Run sets up a Gin router with middleware and routes, and runs it on a specified port.
 func Run(resolverFunc services.ResolverFunc, config Config) error {
 
 	InitLogger()
